@@ -9,7 +9,6 @@ const Anecdotes = ({ anecdotes, vote }) => {
       </p>
     );
   } else {
-    console.log("asdasdasd");
     return <p>You haven't voted anything yet!</p>;
   }
 };

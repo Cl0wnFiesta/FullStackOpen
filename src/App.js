@@ -1,5 +1,9 @@
 import { useState } from "react";
 
+const Button = ({ onClick, text }) => {
+  return <button onClick={onClick}>{text}</button>;
+};
+
 const VotedAnecdotes = ({ anecdotes, vote }) => {
   if (Math.max(...vote) !== 0) {
     return (
@@ -44,7 +48,7 @@ const App = () => {
     if (random !== selected) setSelected(random);
     else {
       let nextRand = random;
-      while (nextRand === selected){
+      while (nextRand === selected) {
         nextRand = Math.floor(Math.random() * anecdotes.length);
       }
       setSelected(nextRand);
@@ -55,8 +59,8 @@ const App = () => {
     <div>
       <h1>Anecdotes of the day</h1>
       <Anecdotes anecdotes={anecdotes} vote={vote} selected={selected} />
-      <button onClick={() => getRandomNumber()}>Next Text</button>
-      <button onClick={() => voteText({ selected })}>Vote</button>
+      <Button onClick={() => getRandomNumber()} text={"Next Text"} />
+      <Button onClick={() => voteText({ selected })} text={"Vote"} />
       <h1>Anecdotes with the most votes</h1>
       <VotedAnecdotes anecdotes={anecdotes} vote={vote} />
     </div>

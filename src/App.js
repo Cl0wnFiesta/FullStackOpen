@@ -90,6 +90,7 @@ const App = () => {
     setNewName("");
     setNumber("");
     setFind("");
+    setFilter("")
     console.log(persons);
   };
 
@@ -104,7 +105,7 @@ const App = () => {
   const handleFindChange = (event) => {
     setFind(event.target.value);
     const result = persons.filter((person) =>
-      person.name.toLowerCase().includes(event.target.value)
+      person.name.toLowerCase().includes(event.target.value.toLowerCase())
     );
     setFilter(result);
   };

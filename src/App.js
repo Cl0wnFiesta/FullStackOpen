@@ -157,7 +157,6 @@ const App = () => {
       <h2>Phonebook</h2>
       <Filter
         persons={persons}
-        filteredPerson={filteredPerson}
         handleFindChange={handleFindChange}
       />
       <h3>Add new</h3>
@@ -165,7 +164,6 @@ const App = () => {
         addName={addName}
         newName={newName}
         newNumber={newNumber}
-        handleFindChange={handleFindChange}
         handleNameChange={handleNameChange}
         handleNumberChange={handleNumberChange}
       />

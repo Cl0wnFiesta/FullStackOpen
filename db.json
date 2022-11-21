@@ -2,38 +2,28 @@
   "persons": [
     {
       "name": "a",
-      "number": "c",
+      "number": "1",
       "id": 1
     },
     {
-      "name": "g",
-      "number": "a",
+      "name": "b",
+      "number": "b",
       "id": 2
     },
     {
-      "name": "g",
-      "number": "a",
+      "name": "c",
+      "number": "c",
       "id": 3
     },
     {
-      "name": "yghjk",
-      "number": "ghujkl",
+      "name": "d",
+      "number": "d",
       "id": 4
     },
     {
-      "name": "yghjk ghujkl",
-      "number": "asd",
+      "name": "e",
+      "number": "e",
       "id": 5
-    },
-    {
-      "name": "tg",
-      "number": "a",
-      "id": 6
-    },
-    {
-      "name": "q",
-      "number": "a",
-      "id": 7
     }
   ]
 }

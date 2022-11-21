@@ -3,7 +3,7 @@ import services from "./components/phonebook";
 import "./index.css";
 
 const Persons = ({ persons, filteredPerson, findPerson, handleDelete }) => {
-  if (findPerson !== "" && filteredPerson !== [])
+  if (filteredPerson.length !== 0) {
     return (
       <ul>
         {filteredPerson.map((person, i) => (
@@ -20,7 +20,7 @@ const Persons = ({ persons, filteredPerson, findPerson, handleDelete }) => {
         ))}
       </ul>
     );
-  else {
+  } else {
     return (
       <ul>
         {persons.map((person, i) => (
@@ -60,11 +60,12 @@ const PersonForm = ({
     </form>
   );
 };
+
 const Filter = ({ findPerson, handleFindChange }) => {
   return (
     <div>
       filter shown with:
-      <input value={findPerson} onChange={handleFindChange} />
+      <input type="text" value={findPerson} onChange={handleFindChange} />
     </div>
   );
 };
@@ -91,14 +92,25 @@ const App = () => {
   }, []);
 
   const addName = (event) => {
-    const nameExist = persons.find((p) => p.name === newName);
+    event.preventDefault();
 
+    if (newName === "") {
+      alert("Cannot add empty name");
+      return;
+    }
+
+    const nameObject = {
+      name: newName,
+      number: newNumber,
+    };
+
+    const nameExist = persons.find((p) => p.name === newName);
     if (nameExist) {
-      if (
-        window.confirm(
-          `${newName} is already added to phonebook. Do you want to replace the old number with a new one?`
-        )
-      ) {
+      const confirm = window.confirm(
+        `${newName} is already added to phonebook. Do you want to replace the old number with a new one?`
+      );
+
+      if (confirm) {
         const id = persons.find((p) => p.id === nameExist.id);
         const changeNumber = { ...id, number: newNumber };
 
@@ -107,7 +119,7 @@ const App = () => {
           .then((returnedNumber) => {
             setPersons(
               persons.map((person) =>
-                person.id !== id ? person : returnedNumber
+                person.id !== nameExist.id ? person : returnedNumber
               )
             );
             setError({
@@ -126,24 +138,13 @@ const App = () => {
             }, 5000);
             setPersons(persons.filter((n) => n.id !== newName.id));
           });
-
-        return (setName(""), setNumber(""));
-      } else {
-        return event.preventDefault();
       }
+      setName("");
+      setNumber("");
+      setFind("");
+      setFilter([]);
+      return;
     }
-
-    if (newName === "") {
-      alert("Cannot add empty name");
-      return event.preventDefault();
-    }
-
-    event.preventDefault();
-    const nameObject = {
-      name: newName,
-      number: newNumber,
-    };
-
     services
       .create(nameObject)
       .then((person) => {
@@ -166,7 +167,7 @@ const App = () => {
 
     setNumber("");
     setFind("");
-    setFilter("");
+    setFilter([]);
   };
 
   const handleNameChange = (event) => {
@@ -184,6 +185,12 @@ const App = () => {
         .then(() => {
           const filteredPersons = persons.filter((p) => p.id !== person.id);
           setPersons(filteredPersons);
+          setError({
+            notification: `${person.name} is now deleted`,
+          });
+          setTimeout(() => {
+            setError("");
+          }, 5000);
         })
         .catch((error) => {
           setError({
@@ -196,6 +203,8 @@ const App = () => {
         });
     }
     setFind("");
+    setFilter([]);
+    return;
   };
 
   const handleFindChange = (event) => {
@@ -213,7 +222,7 @@ const App = () => {
         message={errorMessage?.notification || errorMessage?.error}
         className={errorMessage?.notification ? "notification" : "error"}
       />
-      <Filter persons={persons} handleFindChange={handleFindChange} />
+      <Filter findPerson={findPerson} handleFindChange={handleFindChange} />
       <h3>Add new</h3>
       <PersonForm
         addName={addName}

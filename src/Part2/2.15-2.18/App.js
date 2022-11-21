@@ -173,6 +173,8 @@ const App = () => {
       <Persons
         persons={persons}
         filteredPerson={filteredPerson}
+        setPersons={setPersons}
+        setFind={setFind}
         handleDelete={handleDelete}
         findPerson={findPerson}
       />

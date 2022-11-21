@@ -94,7 +94,7 @@ const App = () => {
   useEffect(() => {
     const baseUrl = "https://api.openweathermap.org/data/2.5/weather";
     const ACCESS_KEY = process.env.REACT_APP_API_KEY;
-
+    
     if (filteredCountry.length === 1) {
       const lat = filteredCountry.map((country) => country.latlng[0]);
       const lon = filteredCountry.map((country) => country.latlng[1]);
@@ -137,7 +137,7 @@ const App = () => {
       <Countries
         handleShowClick={handleShowClick}
         countries={filteredCountry}
-        weather={weather}
+        weather={weather} 
       />
     </div>
   );

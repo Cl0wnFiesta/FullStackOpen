@@ -159,7 +159,7 @@ const App = () => {
       })
       .catch((error) => {
         console.log(error.response.data.error);
-        setError({ error: error.response.data.error});
+        setError({ error: error.response.data.error });
         setTimeout(() => {
           setError("");
         }, 5000);

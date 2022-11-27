@@ -158,7 +158,8 @@ const App = () => {
         }, 5000);
       })
       .catch((error) => {
-        setError({ error: `Something went wrong` });
+        console.log(error.response.data.error);
+        setError({ error: error.response.data.error});
         setTimeout(() => {
           setError("");
         }, 5000);

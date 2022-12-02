@@ -112,7 +112,7 @@ test('blog without url is not added', async () => {
   expect(response.body).toHaveLength(helper.initialBlogs.length)
 })
 
-test('a specific note can be viewed', async () => {
+test('a specific blog can be viewed', async () => {
   const blogsAtStart = await helper.blogsInDp()
 
   const blogsToView = blogsAtStart[0]
